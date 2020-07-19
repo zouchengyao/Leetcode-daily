@@ -16,35 +16,29 @@
  */
 class Solution {
 public:
-        vector<vector<int>> res;
+    vector<string> res;
     vector<string> binaryTreePaths(TreeNode* root) {
-        for (const auto c : res)
-            for(const auto a : c)
-            {
-                cout << a << endl;
-            }
-
-
-        return {};
+        r(root, {});
+        return res;
     }
 
-    void r(TreeNode* root, vector<int> v)
+    void r(TreeNode * root, string s)
     {
         if (root == nullptr)    return;
-        v.push_back(root->val);
-        if (root->left == nullptr && root->right == nullptr )
+        if ( root -> left == nullptr && root -> right == nullptr )
         {
-            // this is the leaf
-            res.push_back(v);
+            // this is the leaf node
+            if(s.size() != 0)   res.push_back( s + "->"+ to_string(root->val));
+            else                res.push_back(to_string(root->val)); 
             return;
         }
-        r(root->left, v);
-        r(root->right, v);
-
-        return;
-
+        // cout << s.size() << endl;
+        if(s.size() != 0) (s = s + "->" + to_string(root->val));
+        else            s = to_string(root->val);
+        r(root->left, s);
+        r(root->right, s);
     }
-
+ 
 };
 // @lc code=end
 
